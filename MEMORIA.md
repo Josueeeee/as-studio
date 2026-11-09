@@ -16,7 +16,10 @@ _Actualizado: 2026-11-09_
 - 2026-11-09 — Texto chico en coral sobre crema usa `--coral-texto` #C4401F, no el coral de marca. **Por qué:** #FE5B3C sobre crema no llega a contraste AA.
 - 2026-11-09 — Sin JS; los enlaces de contacto van directo en el HTML (comentarios `Contacto:`). **Por qué:** pedido del usuario (solo HTML + CSS).
 
+- 2026-11-09 — El confeti del cierre "explota" desde el logo con rangos `cover <n>vh` sobre la línea `--cta`, no con `entry %`. **Por qué:** con `entry %` en una sección más alta que la pantalla la explosión ocurría antes de ver el logo.
+
 ## Errores a evitar
+- Para verificar animaciones de scroll no fiarse de capturas (llegan con retraso): leer `el.getAnimations()[i].effect.getComputedTiming().progress` tras un `setTimeout`, recalculando la posición de la sección en cada paso.
 - Cintas giradas con margen negativo daban 21 px de scroll lateral; `overflow-x:clip` en `body` no basta (se propaga al viewport) → va en `main`. Nunca `overflow:hidden` en ancestros de `.fases-sticky` (rompe el sticky); usar `clip`.
 - Las animaciones de scroll usan `translate`/`scale`/`rotate` sueltos y la de flotar usa `transform`, para que no se pisen.
 

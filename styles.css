@@ -160,6 +160,9 @@ h1 em{font-style:normal;font-weight:800;color:var(--amarillo);display:block}
 .cta .lema{color:#2b2740;font-weight:400}
 .confeti{position:absolute;inset:0;pointer-events:none;z-index:0}
 .confeti i{position:absolute;left:var(--x);top:var(--y);width:22px;height:13px;border-radius:4px;background:var(--c);rotate:var(--r)}
+.confeti i.redondo{width:14px;height:14px;border-radius:50%}
+.confeti i.tira{width:7px;height:28px;border-radius:4px}
+.cta{view-timeline-name:--cta}
 
 footer{border-top:1px solid rgba(250,247,242,.18);padding:32px 0;font-size:.9rem;color:var(--suave)}
 footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center}
@@ -241,12 +244,35 @@ footer .marca img{height:28px} footer .marca span{font-size:1.15rem}
     .servicio::after{animation:punto linear both;animation-timeline:view();animation-range:entry 40% entry 100%}
     @keyframes punto{from{scale:0}}
 
-    /* Confeti: sube y gira con el scroll, cada pieza a su velocidad */
-    .confeti i{animation:confeti linear both;animation-timeline:view();animation-range:cover}
-    @keyframes confeti{
-      from{translate:0 calc(var(--v) * 90px);rotate:calc(var(--r) - 120deg)}
-      to{translate:0 calc(var(--v) * -90px);rotate:calc(var(--r) + 120deg)}
+    /* Confeti: EXPLOTA desde el logo cuando el cierre entra en pantalla,
+       con rebote, y luego deriva despacio mientras se sigue bajando.
+       Ambas animaciones van en la línea de tiempo de la sección (--cta). */
+    .confeti i{
+      animation:explota linear both,deriva linear both;
+      animation-timeline:--cta,--cta;
+      /* "cover 0" = el borde superior del cierre asoma por abajo; en vh para no depender del alto de la sección */
+      animation-range:cover calc(42vh + var(--d) * .5) cover calc(82vh + var(--d) * .5),cover 90vh exit 100%;
     }
+    @keyframes explota{
+      0%{left:50%;top:22%;scale:0;opacity:0;rotate:0deg;animation-timing-function:cubic-bezier(.1,.85,.25,1)}
+      8%{opacity:1;scale:1.4}
+      70%{
+        left:calc(50% + (var(--x) - 50%) * 1.12);
+        top:calc(22% + (var(--y) - 22%) * 1.12);
+        scale:1.1;rotate:calc(var(--r) + 540deg);
+        animation-timing-function:ease-in-out;
+      }
+      100%{left:var(--x);top:var(--y);scale:1;opacity:1;rotate:calc(var(--r) + 720deg)}
+    }
+    @keyframes deriva{
+      from{translate:0 0}
+      to{translate:calc(var(--v) * 12px) calc(var(--v) * -110px)}
+    }
+
+    /* El botón de Instagram hace "pop" justo después de la explosión */
+    .cta .btn-tinta{animation:pop linear both;animation-timeline:--cta;animation-range:cover 80vh cover 105vh}
+    .cta .cta-logo{animation-timeline:--cta;animation-range:cover 20vh cover 55vh}
+    @keyframes pop{0%{scale:.6;opacity:0}70%{scale:1.12;opacity:1}100%{scale:1}}
 
     /* CTA: el logo entra girando */
     .cta-logo{animation:cta-logo linear both;animation-timeline:view();animation-range:entry 0% cover 40%}
