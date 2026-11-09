@@ -2,7 +2,8 @@
 _Actualizado: 2026-11-09_
 
 ## Estado actual
-- Landing estática de una página: `index.html` + `styles.css` + `assets/`, **sin JavaScript**, sin build ni dependencias. No publicada como sitio.
+- Landing estática de una página: `index.html` + `styles.css` + `assets/`, **sin JavaScript**, sin build ni dependencias.
+- **Publicada 2026-11-09** con GitHub Pages (rama `main`, `/ (root)`): https://josueeeee.github.io/as-studio/ — cada push a `main` la actualiza en 1-2 min. 404 propia en `404.html` (rutas absolutas `/as-studio/...`).
 - Git: remoto `origin` = github.com/Josueeeee/as-studio, rama `main` (primer push 2026-11-09). Push con PowerShell, no Git Bash.
 - Efectos de scroll 100 % CSS (`animation-timeline: scroll()/view()`), dentro de `@supports` y `prefers-reduced-motion`: barra de progreso, cabecera que se compacta, parallax de círculos, cintas que avanzan, sección Antes/Durante/Después fijada en escritorio (300vh + sticky), recap que gira y se destapa.
 - Vista previa: config `as-studio-web` en `Desktop/.claude/launch.json` → http://localhost:4196.
@@ -28,7 +29,7 @@ _Actualizado: 2026-11-09_
 - [ ] Agregar botón de WhatsApp cuando haya número.
 - [ ] Firefox/Safari antiguos sin scroll-driven animations ven la página estática (correcto, pero sin efectos).
 - [ ] Pedir logo vectorial (SVG) y más trabajos/fotos reales para el portafolio.
-- [ ] Antes de publicar: dominio, `og:image` con URL absoluta, sitemap/robots, 404 propia, aviso de privacidad (checklist web de AGENTS.md con ✅/❌/N/A, investigación legal por país → `LEGAL.md`).
+- [ ] Falta de la checklist web: aviso legal/privacidad (investigación legal por país → `LEGAL.md`), JSON-LD, Lighthouse, Search Console. Si se compra dominio propio, cambiar `canonical`, `og:*` y `sitemap.xml` (hoy apuntan a github.io) y agregar CNAME. En github.io de proyecto, `robots.txt` no está en la raíz del dominio, así que los buscadores no lo leen.
 - [ ] Confirmar con el cliente el texto del hero ("Somos una agencia creativa…"), es redacción propia.
 
 ## Propuestas para CLAUDE.md / AGENTS.md
