@@ -2,7 +2,8 @@
 _Actualizado: 2026-11-09_
 
 ## Estado actual
-- Landing estática de una página: `index.html` + `styles.css` + `assets/`, **sin JavaScript**, sin build ni dependencias. Solo local; no publicada.
+- Landing estática de una página: `index.html` + `styles.css` + `assets/`, **sin JavaScript**, sin build ni dependencias. No publicada como sitio.
+- Git: remoto `origin` = github.com/Josueeeee/as-studio, rama `main` (primer push 2026-11-09). Push con PowerShell, no Git Bash.
 - Efectos de scroll 100 % CSS (`animation-timeline: scroll()/view()`), dentro de `@supports` y `prefers-reduced-motion`: barra de progreso, cabecera que se compacta, parallax de círculos, cintas que avanzan, sección Antes/Durante/Después fijada en escritorio (300vh + sticky), recap que gira y se destapa.
 - Vista previa: config `as-studio-web` en `Desktop/.claude/launch.json` → http://localhost:4196.
 - Secciones: hero, Servicios (4 tarjetas sticky que se apilan), Antes/Durante/Después (eventos), caso Halloween Party (La Zona Food Park), cierre "Cuéntanos tu idea" con confeti, footer.
