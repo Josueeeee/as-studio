@@ -1,0 +1,274 @@
+/* =========================================================
+   as studio — estilos
+   Efectos de scroll 100 % CSS (scroll-driven animations:
+   animation-timeline scroll()/view()). En navegadores sin
+   soporte, o con "reducir movimiento", todo se ve estático.
+   ========================================================= */
+
+:root{
+  --morado:#5B2DFF; --morado-osc:#4A1FE6; --amarillo:#FFC31D; --coral:#FE5B3C;
+  --crema:#FAF7F2; --tinta:#141220; --coral-texto:#C4401F; /* coral oscurecido para texto chico sobre crema (AA) */ --suave:rgba(250,247,242,.82);
+  --radio:28px; --max:1120px; --alto-nav:72px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:var(--alto-nav)}
+body{font-family:Poppins,system-ui,sans-serif;background:var(--morado);color:var(--crema);line-height:1.55;overflow-x:clip;-webkit-font-smoothing:antialiased}
+main{overflow-x:clip} /* las cintas giradas sobresalen; clip no rompe el sticky */
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--amarillo);outline-offset:4px;border-radius:8px}
+.wrap{width:min(var(--max),100% - 32px);margin-inline:auto}
+.saltar{position:absolute;left:-999px;top:8px;background:var(--amarillo);color:var(--morado);padding:10px 16px;border-radius:999px;font-weight:700;z-index:99}
+.saltar:focus{left:16px}
+
+/* ---------- Círculos de la marca ---------- */
+.burbuja{position:absolute;width:var(--t);height:var(--t);border-radius:50%;pointer-events:none;z-index:0}
+.b-amarillo{background:var(--amarillo)} .b-coral{background:var(--coral)} .b-crema{background:var(--crema)}
+
+/* ---------- Barra de progreso ---------- */
+.progreso{display:none;position:fixed;inset:0 0 auto 0;height:4px;z-index:60;background:linear-gradient(90deg,var(--amarillo),var(--coral));transform-origin:0 50%}
+
+/* ---------- Navegación ---------- */
+.cabecera{position:sticky;top:0;z-index:20;background:rgba(91,45,255,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:var(--alto-nav)}
+.marca{display:flex;align-items:flex-end;gap:8px;text-decoration:none;min-height:44px;padding-bottom:3px}
+.marca img{height:38px;width:auto}
+.marca span{font-size:1.5rem;font-weight:400;line-height:1;letter-spacing:-.01em}
+.nav ul{display:flex;gap:28px;list-style:none;align-items:center}
+.nav ul a{text-decoration:none;font-size:.95rem;opacity:.9}
+.nav ul a:hover{opacity:1;color:var(--amarillo)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:12px 26px;border-radius:999px;font-weight:700;text-decoration:none;border:0;cursor:pointer;font-family:inherit;font-size:1rem;transition:transform .2s ease,box-shadow .2s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(20,18,32,.25)}
+.btn-amarillo{background:var(--amarillo);color:var(--morado)}
+.nav ul a.btn-amarillo{opacity:1}
+.nav ul a.btn-amarillo:hover{color:var(--morado)}
+.btn-borde{background:transparent;color:var(--crema);box-shadow:inset 0 0 0 2px var(--crema)}
+.btn-borde:hover{box-shadow:inset 0 0 0 2px var(--amarillo);color:var(--amarillo)}
+.nav .btn{min-height:44px;padding:10px 20px;font-size:.92rem}
+@media (max-width:760px){.nav ul .ocultar-movil{display:none}.nav ul{gap:12px}}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;overflow:clip;padding:72px 0 120px;min-height:calc(100svh - var(--alto-nav));display:flex;align-items:center}
+.hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.saludo{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:300;line-height:1.1}
+.saludo strong{display:block;font-weight:700}
+h1{font-size:clamp(2.6rem,6.4vw,5rem);font-weight:300;line-height:1.02;letter-spacing:-.03em;margin:24px 0 20px}
+h1 em{font-style:normal;font-weight:800;color:var(--amarillo);display:block}
+.lead{font-size:1.15rem;color:var(--suave);max-width:34ch;margin-bottom:32px}
+.acciones{display:flex;flex-wrap:wrap;gap:14px}
+.logo-grande{justify-self:center;width:min(100%,420px)}
+.logo-grande .studio{font-size:clamp(3.4rem,8vw,6rem);line-height:1;text-align:center;margin-top:18px;letter-spacing:-.02em}
+.logo-grande .agencia{color:var(--amarillo);letter-spacing:.42em;text-align:center;font-size:.95rem;margin-top:14px;padding-left:.42em}
+.baja{position:absolute;left:50%;bottom:28px;translate:-50% 0;font-size:.75rem;letter-spacing:.3em;text-transform:uppercase;opacity:.7;z-index:1}
+.baja::after{content:"";display:block;width:2px;height:34px;margin:10px auto 0;background:linear-gradient(var(--crema),transparent)}
+@media (max-width:860px){
+  .hero{min-height:auto;padding:48px 0 120px}
+  .hero .wrap{grid-template-columns:1fr;gap:40px}
+  .logo-grande{order:-1;width:min(55%,200px)}
+  .logo-grande .studio{font-size:2.6rem;margin-top:10px}
+  .logo-grande .agencia{font-size:.7rem;letter-spacing:.3em}
+  .hero .esquina{--t:130px!important;right:-60px!important;top:-60px!important}
+}
+
+/* ---------- Cintas ---------- */
+.cinta{background:var(--amarillo);color:var(--morado);overflow:clip;padding:18px 0;rotate:-2deg;margin:-14px -20px;position:relative;z-index:3;box-shadow:0 14px 30px rgba(20,18,32,.2)}
+.cinta-pista{display:flex;align-items:center;gap:32px;white-space:nowrap;width:max-content;font-weight:800;font-size:clamp(1.6rem,4vw,2.8rem);letter-spacing:-.01em;line-height:1}
+.cinta-pista i{width:.55em;height:.55em;border-radius:50%;background:var(--coral);flex:none}
+.cinta-coral{background:var(--coral);color:var(--crema);rotate:2deg}
+.cinta-coral .cinta-pista i{background:var(--amarillo)}
+
+/* ---------- Antes · Durante · Después ---------- */
+.fases-pin{position:relative}
+.fases-sticky{position:relative;overflow:clip;padding:120px 0}
+.titulo{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:300;line-height:1.05;letter-spacing:-.025em}
+.titulo strong{font-weight:700;display:block}
+.intro{color:var(--suave);font-size:1.1rem;max-width:48ch;margin-top:18px}
+.fases{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px;position:relative;z-index:1}
+.fase{border:3px solid var(--c);border-radius:var(--radio);padding:34px 30px 38px;background:rgba(74,31,230,.75);transition:background .25s ease}
+.fase:hover{background:rgba(74,31,230,.95)}
+.fase .num{font-size:.85rem;letter-spacing:.2em;opacity:.7}
+.fase h3{color:var(--c);font-size:2rem;font-weight:800;letter-spacing:-.01em;margin:10px 0 12px}
+.fase p{color:var(--suave);font-size:1.05rem}
+.f1{--c:var(--amarillo)} .f2{--c:#FF7A5F} .f3{--c:var(--crema)}
+.fases-barra{display:none;height:6px;border-radius:99px;background:rgba(250,247,242,.18);margin-top:36px;overflow:hidden;position:relative;z-index:1}
+.fases-barra span{display:block;height:100%;background:linear-gradient(90deg,var(--amarillo),var(--coral),var(--crema));transform-origin:0 50%}
+@media (max-width:860px){.fases{grid-template-columns:1fr}}
+
+/* ---------- Trabajo ---------- */
+.sec{position:relative;padding:120px 0;overflow:clip}
+.trabajo{background:var(--crema);color:var(--tinta)}
+.trabajo .titulo{color:var(--tinta)}
+.caso{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center;margin-top:56px;position:relative;z-index:1}
+.caso figure{border:4px solid var(--amarillo);border-radius:var(--radio);overflow:hidden;box-shadow:0 30px 60px -20px rgba(91,45,255,.45);rotate:-1.5deg}
+.caso figure img{width:100%;aspect-ratio:866/645;object-fit:cover}
+.etiqueta{display:inline-block;background:var(--morado);color:var(--crema);font-size:.8rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:8px 14px;border-radius:999px}
+.caso h3{font-size:clamp(1.7rem,3vw,2.3rem);font-weight:700;color:var(--morado);line-height:1.15;margin:18px 0 12px}
+.caso p{color:#4a4560;font-size:1.08rem}
+.caso ul{list-style:none;margin-top:22px;display:grid;gap:10px}
+.caso li{display:flex;gap:12px;align-items:center;font-weight:600}
+.caso li::before{content:"";width:12px;height:12px;border-radius:50%;background:var(--c);flex:none}
+.caso li:nth-child(1){--c:var(--amarillo)} .caso li:nth-child(2){--c:var(--coral)} .caso li:nth-child(3){--c:var(--morado)}
+@media (max-width:860px){.caso{grid-template-columns:1fr;gap:32px}}
+
+/* ---------- CTA ---------- */
+.cta{text-align:center;padding-top:150px}
+.cta .wrap{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center}
+.cta-logo{width:min(46vw,190px);margin-bottom:40px}
+.cta .titulo{font-size:clamp(2.2rem,6vw,4.2rem)}
+.cta .titulo strong{font-weight:800}
+.cta .acciones{justify-content:center;margin-top:40px}
+.lema{color:var(--amarillo);font-weight:600;margin-top:36px;font-size:1.1rem}
+
+/* ---------- Servicios ---------- */
+.b-morado{background:var(--morado)}
+.servicios{position:relative;overflow:clip;background:var(--crema);color:var(--tinta);padding:130px 0 120px}
+.servicios-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;align-items:start;position:relative;z-index:1}
+.servicios-cabeza{position:sticky;top:calc(var(--alto-nav) + 48px)}
+.sobretitulo{color:var(--coral-texto);letter-spacing:.38em;font-weight:600;font-size:.95rem;margin-bottom:14px}
+.servicios .titulo{color:var(--tinta)}
+.servicios .titulo strong{font-weight:800}
+.servicios .intro{color:#4a4560}
+.servicios-lista{list-style:none;display:grid;gap:28px;padding-bottom:12vh}
+.servicio{
+  position:sticky;top:calc(var(--alto-nav) + 28px + var(--i) * 20px);
+  display:flex;gap:28px;align-items:center;min-height:180px;padding:34px 56px 34px 40px;
+  border-radius:30px;background:var(--bg);color:var(--fg);
+  box-shadow:0 -6px 24px rgba(20,18,32,.10),0 22px 40px -20px rgba(20,18,32,.45);
+}
+.servicio::after{content:"";position:absolute;top:22px;right:24px;width:18px;height:18px;border-radius:50%;background:var(--punto)}
+.s-num{font-size:clamp(2.6rem,5vw,3.6rem);font-weight:800;line-height:1;color:var(--num);flex:none;min-width:2.2ch}
+.servicio h3{font-size:clamp(1.25rem,2.4vw,1.7rem);font-weight:700;line-height:1.2}
+.servicio p{margin-top:6px;font-size:1.02rem;opacity:.92}
+.s1{--i:0;--bg:var(--morado);--fg:var(--crema);--num:var(--amarillo);--punto:var(--amarillo)}
+.s2{--i:1;--bg:var(--coral);--fg:var(--tinta);--num:var(--tinta);--punto:var(--crema)}
+.s3{--i:2;--bg:var(--amarillo);--fg:var(--tinta);--num:var(--morado);--punto:var(--morado)}
+.s4{--i:3;--bg:var(--tinta);--fg:var(--crema);--num:var(--coral);--punto:var(--coral)}
+@media (max-width:860px){
+  .servicios{padding:90px 0}
+  .servicios-grid{grid-template-columns:1fr;gap:36px}
+  .servicios-cabeza{position:static}
+  .servicio{flex-direction:column;align-items:flex-start;gap:10px;min-height:0;padding:26px 48px 28px 24px;top:calc(var(--alto-nav) + 16px + var(--i) * 14px)}
+}
+
+/* ---------- Cierre "Cuéntanos tu idea" ---------- */
+.cta{background:var(--crema);color:var(--tinta)}
+.cta-logo{width:min(56vw,260px);margin-bottom:6px}
+.cta-studio{font-size:clamp(2.8rem,7vw,4.4rem);line-height:1;letter-spacing:-.02em}
+.cta-agencia{color:var(--coral-texto);letter-spacing:.38em;font-size:.85rem;margin:14px 0 40px;padding-left:.38em}
+.cta .titulo{color:var(--tinta);font-weight:800}
+.btn-tinta{background:var(--tinta);color:var(--amarillo);font-size:1.15rem;padding:16px 34px;min-height:56px}
+.cta .lema{color:#2b2740;font-weight:400}
+.confeti{position:absolute;inset:0;pointer-events:none;z-index:0}
+.confeti i{position:absolute;left:var(--x);top:var(--y);width:22px;height:13px;border-radius:4px;background:var(--c);rotate:var(--r)}
+
+footer{border-top:1px solid rgba(250,247,242,.18);padding:32px 0;font-size:.9rem;color:var(--suave)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center}
+footer .marca img{height:28px} footer .marca span{font-size:1.15rem}
+
+/* =========================================================
+   MOVIMIENTO
+   ========================================================= */
+@media (prefers-reduced-motion:no-preference){
+
+  /* Entrada del hero al cargar (por tiempo, funciona en todos) */
+  .entra{animation:entra .9s cubic-bezier(.2,.7,.2,1) var(--d,0s) both}
+  @keyframes entra{from{opacity:0;translate:0 30px}}
+
+  /* Flotado suave de los círculos (usa transform; el scroll usa translate) */
+  .burbuja{animation:flota 8s ease-in-out infinite}
+  @keyframes flota{50%{transform:translateY(-14px)}}
+
+  .baja::after{animation:baja 1.8s ease-in-out infinite;transform-origin:top}
+  @keyframes baja{0%{scale:1 0}50%{scale:1 1}100%{scale:1 0;transform-origin:bottom}}
+
+  /* ---------- Efectos ligados al scroll ---------- */
+  @supports (animation-timeline: view()) {
+
+    /* Barra de progreso de lectura */
+    .progreso{display:block;animation:progreso linear both;animation-timeline:scroll(root)}
+    @keyframes progreso{from{scale:0 1}to{scale:1 1}}
+
+    /* Cabecera: se compacta y gana sombra al bajar */
+    .cabecera{animation:cabecera linear both;animation-timeline:scroll(root);animation-range:0 160px}
+    @keyframes cabecera{
+      from{background-color:rgba(91,45,255,0);box-shadow:0 0 0 rgba(20,18,32,0)}
+      to{background-color:rgba(74,31,230,.94);box-shadow:0 10px 30px rgba(20,18,32,.28)}
+    }
+    .nav{animation:nav linear both;animation-timeline:scroll(root);animation-range:0 160px}
+    @keyframes nav{to{min-height:60px}}
+
+    /* Parallax de los círculos: cada uno a su velocidad (--vel) */
+    .burbuja{
+      animation:flota 8s ease-in-out infinite,parallax linear both;
+      animation-timeline:auto,view();
+      animation-range:normal,cover;
+    }
+    @keyframes parallax{
+      from{translate:0 calc(var(--vel,1) * 70px)}
+      to{translate:0 calc(var(--vel,1) * -70px)}
+    }
+
+    /* Hero: el texto se va hacia arriba y el logo gira al salir */
+    .hero-texto{animation:hero-sale linear both;animation-timeline:view();animation-range:exit 0% exit 90%}
+    @keyframes hero-sale{to{opacity:0;translate:0 -90px}}
+    .logo-grande img{animation:logo-sale linear both;animation-timeline:view();animation-range:exit -10% exit 90%}
+    @keyframes logo-sale{to{scale:.6;rotate:-18deg;opacity:0}}
+    .baja{animation:desvanece linear both;animation-timeline:scroll(root);animation-range:0 120px}
+    @keyframes desvanece{to{opacity:0}}
+
+    /* Cintas: avanzan con el scroll, en sentidos opuestos */
+    .cinta-pista{animation:cinta linear both;animation-timeline:view();animation-range:cover}
+    @keyframes cinta{from{translate:0 0}to{translate:-35% 0}}
+    .cinta-coral .cinta-pista{animation-name:cinta-inv}
+    @keyframes cinta-inv{from{translate:-35% 0}to{translate:0 0}}
+
+    /* Aparición genérica */
+    .revela{animation:revela linear both;animation-timeline:view();animation-range:entry 5% cover 30%}
+    @keyframes revela{from{opacity:0;translate:0 60px;scale:.96}}
+    .desliza{animation:desliza linear both;animation-timeline:view();animation-range:entry 0% cover 25%}
+    @keyframes desliza{from{opacity:0;translate:-48px 0}}
+
+    /* Recap: la tarjeta gira a su sitio y la imagen se destapa */
+    .caso figure{animation:figura linear both;animation-timeline:view();animation-range:entry 0% cover 45%}
+    @keyframes figura{from{rotate:-12deg;scale:.82;opacity:0}to{rotate:-1.5deg;scale:1;opacity:1}}
+    .caso figure img{animation:destapa linear both;animation-timeline:view();animation-range:entry 25% cover 50%}
+    @keyframes destapa{from{clip-path:inset(0 0 100% 0);scale:1.25}to{clip-path:inset(0);scale:1}}
+
+    /* Servicios: cada tarjeta sube girando y se apila sobre la anterior (sticky) */
+    .servicio{animation:servicio linear both;animation-timeline:view();animation-range:entry 0% entry 90%}
+    .s1{--g:-6deg} .s2{--g:5deg} .s3{--g:-4deg} .s4{--g:6deg}
+    @keyframes servicio{from{opacity:0;translate:0 120px;rotate:var(--g);scale:.9}}
+    .servicio::after{animation:punto linear both;animation-timeline:view();animation-range:entry 40% entry 100%}
+    @keyframes punto{from{scale:0}}
+
+    /* Confeti: sube y gira con el scroll, cada pieza a su velocidad */
+    .confeti i{animation:confeti linear both;animation-timeline:view();animation-range:cover}
+    @keyframes confeti{
+      from{translate:0 calc(var(--v) * 90px);rotate:calc(var(--r) - 120deg)}
+      to{translate:0 calc(var(--v) * -90px);rotate:calc(var(--r) + 120deg)}
+    }
+
+    /* CTA: el logo entra girando */
+    .cta-logo{animation:cta-logo linear both;animation-timeline:view();animation-range:entry 0% cover 40%}
+    @keyframes cta-logo{from{scale:.3;rotate:-160deg;opacity:0}}
+
+    /* Antes · Durante · Después: tarjetas en móvil */
+    .fase{animation:revela linear both;animation-timeline:view();animation-range:entry 5% cover 30%}
+
+    /* Escritorio: la sección se queda fija y las tarjetas
+       llegan una a una mientras se hace scroll */
+    @media (min-width:861px){
+      .fases-pin{height:300vh;view-timeline-name:--fases}
+      .fases-sticky{position:sticky;top:0;height:100vh;display:flex;align-items:center;padding:var(--alto-nav) 0 0}
+      .fases-sticky .wrap{width:min(var(--max),100% - 32px)}
+      .fases-sticky .revela{animation:none}
+      .fase{animation:carta linear both;animation-timeline:--fases}
+      .f1{animation-range:contain 0% contain 22%}
+      .f2{animation-range:contain 22% contain 44%}
+      .f3{animation-range:contain 44% contain 66%}
+      @keyframes carta{from{opacity:0;translate:0 45vh;rotate:8deg;scale:.9}}
+      .fases-barra{display:block}
+      .fases-barra span{animation:progreso linear both;animation-timeline:--fases;animation-range:contain 0% contain 66%}
+    }
+  }
+}
