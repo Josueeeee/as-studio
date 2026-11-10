@@ -7,7 +7,7 @@
 
 :root{
   --morado:#5B2DFF; --morado-osc:#4A1FE6; --amarillo:#FFC31D; --coral:#FE5B3C;
-  --crema:#FAF7F2; --tinta:#141220; --coral-texto:#C4401F; /* coral oscurecido para texto chico sobre crema (AA) */ --suave:rgba(250,247,242,.82);
+  --crema:#FAF7F2; --tinta:#141220; --coral-texto:#C4401F; --wa:#25D366; /* coral oscurecido para texto chico sobre crema (AA) */ --suave:rgba(250,247,242,.82);
   --radio:28px; --max:1120px; --alto-nav:72px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -164,8 +164,32 @@ h1 em{font-style:normal;font-weight:800;color:var(--amarillo);display:block}
 .confeti i.tira{width:7px;height:28px;border-radius:4px}
 .cta{view-timeline-name:--cta}
 
-footer{border-top:1px solid rgba(250,247,242,.18);padding:32px 0;font-size:.9rem;color:var(--suave)}
-footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center}
+/* ---------- Botones con ícono, redes y WhatsApp ---------- */
+.btn svg{flex:none}
+.btn-wa{background:var(--wa);color:var(--tinta);font-size:1.15rem;padding:16px 30px;min-height:56px}
+.redes{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:10px 12px;margin-top:28px}
+.redes a,.redes span{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 16px;border-radius:999px;background:#ECE6FB;color:var(--tinta);font-weight:600;font-size:.95rem;text-decoration:none}
+.redes a{transition:background .2s ease,color .2s ease}
+.redes a:hover{background:var(--morado);color:var(--crema)}
+.redes span{background:transparent;font-weight:400;color:#4a4560}
+
+.wa-flotante{
+  position:fixed;right:20px;bottom:20px;z-index:40;width:60px;height:60px;border-radius:50%;
+  display:grid;place-items:center;background:var(--wa);color:var(--tinta);
+  box-shadow:0 12px 28px rgba(20,18,32,.35);transition:transform .2s ease;
+}
+.wa-flotante:hover{transform:scale(1.08)}
+.wa-flotante::before{content:"";position:absolute;inset:0;border-radius:50%;border:3px solid var(--wa);opacity:0}
+
+footer{border-top:1px solid rgba(250,247,242,.18);padding:36px 0 40px;font-size:.9rem;color:var(--suave)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:20px 32px;justify-content:space-between;align-items:center}
+.pie-texto{line-height:1.7}
+.pie-lugar{display:inline-flex;align-items:center;gap:6px}
+.pie-redes{list-style:none;display:flex;gap:10px}
+.pie-redes a{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:rgba(250,247,242,.12);color:var(--crema);transition:background .2s ease,color .2s ease}
+.pie-redes a:hover{background:var(--amarillo);color:var(--morado)}
+.pie-copy{flex-basis:100%;font-size:.82rem;opacity:.75}
+@media (max-width:760px){footer{padding-bottom:110px}} /* que el botón flotante no tape el pie */
 footer .marca img{height:28px} footer .marca span{font-size:1.15rem}
 
 /* =========================================================
@@ -180,6 +204,12 @@ footer .marca img{height:28px} footer .marca span{font-size:1.15rem}
   /* Flotado suave de los círculos (usa transform; el scroll usa translate) */
   .burbuja{animation:flota 8s ease-in-out infinite}
   @keyframes flota{50%{transform:translateY(-14px)}}
+
+  /* WhatsApp flotante: entra con rebote y late cada pocos segundos */
+  .wa-flotante{animation:wa-entra .7s cubic-bezier(.3,1.6,.5,1) 1s both}
+  @keyframes wa-entra{from{scale:0;rotate:-90deg}}
+  .wa-flotante::before{animation:wa-onda 2.6s ease-out 2s infinite}
+  @keyframes wa-onda{0%{opacity:.7;scale:1}100%{opacity:0;scale:1.6}}
 
   .baja::after{animation:baja 1.8s ease-in-out infinite;transform-origin:top}
   @keyframes baja{0%{scale:1 0}50%{scale:1 1}100%{scale:1 0;transform-origin:bottom}}
