@@ -8,7 +8,7 @@ _Actualizado: 2026-11-09_
 - Efectos de scroll 100 % CSS (`animation-timeline: scroll()/view()`), dentro de `@supports` y `prefers-reduced-motion`: barra de progreso, cabecera que se compacta, parallax de círculos, cintas que avanzan, sección Antes/Durante/Después fijada en escritorio (300vh + sticky), recap que gira y se destapa.
 - Vista previa: config `as-studio-web` en `Desktop/.claude/launch.json` → http://localhost:4196.
 - Secciones: hero, Servicios (4 tarjetas sticky que se apilan), Antes/Durante/Después (eventos), caso Halloween Party (La Zona Food Park), cierre "Cuéntanos tu idea" con confeti, footer.
-- Contacto (dado por el usuario 2026-11-09): Instagram `@as.studiocreativ` (botones "Escríbenos"), TikTok `@as.studiocreatv` (sin la "i", corregido por el usuario; las cuentas magnifiq se quitaron), WhatsApp +504 9954-5663 (botón flotante + cierre + pie), San Marcos, Ocotepeque. JSON-LD `LocalBusiness` en `index.html` con los mismos datos: cambiarlos en los dos lugares.
+- Contacto (dado por el usuario 2026-11-09): Instagram `@as.studiocreativ` (botones "Escríbenos"), TikTok `@as.studiocreativ` (URLs exactas dadas por el usuario; las cuentas magnifiq se quitaron). La imagen del recap enlaza al post de Instagram de la Halloween Party, WhatsApp +504 9954-5663 (botón flotante + cierre + pie), San Marcos, Ocotepeque. JSON-LD `LocalBusiness` en `index.html` con los mismos datos: cambiarlos en los dos lugares.
 - Verificada en navegador 2026-11-09: escritorio y 375 px sin scroll horizontal, consola limpia, red 200.
 
 ## Decisiones
